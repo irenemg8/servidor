@@ -1,0 +1,346 @@
+\hypertarget{Arduino__Reales_2PBIO__Sprint0_2EmisoraBLE_8h_source}{}\doxysection{Emisora\+BLE.\+h}
+\label{Arduino__Reales_2PBIO__Sprint0_2EmisoraBLE_8h_source}\index{Arduino\_Reales/PBIO\_Sprint0/EmisoraBLE.h@{Arduino\_Reales/PBIO\_Sprint0/EmisoraBLE.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// -\/*-\/ mode: c++ -\/*-\/}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{4 \textcolor{comment}{// Jordi Bataller i Mascarell}}
+\DoxyCodeLine{5 \textcolor{comment}{// 2019-\/07-\/07}}
+\DoxyCodeLine{6 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef EMISORA\_H\_INCLUIDO}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define EMISORA\_H\_INCLUIDO}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{comment}{// Buena introducción: https://learn.adafruit.com/introduction-\/to-\/bluetooth-\/low-\/energy/gap}}
+\DoxyCodeLine{11 \textcolor{comment}{// https://os.mbed.com/blog/entry/BLE-\/Beacons-\/URIBeacon-\/AltBeacons-\/iBeacon/}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{comment}{// fuente: https://www.instructables.com/id/Beaconeddystone-\/and-\/Adafruit-\/NRF52-\/Advertise-\/Your-\//}}
+\DoxyCodeLine{14 \textcolor{comment}{// https://github.com/nkolban/ESP32\_BLE\_Arduino/blob/master/src/BLEBeacon.h}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{// https://os.mbed.com/blog/entry/BLE-\/Beacons-\/URIBeacon-\/AltBeacons-\/iBeacon/}}
+\DoxyCodeLine{17 \textcolor{comment}{// https://learn.adafruit.com/bluefruit-\/nrf52-\/feather-\/learning-\/guide/bleadvertising}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{20 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include "{}ServicioEnEmisora.h"{}}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{24 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{25 \textcolor{keyword}{class }\mbox{\hyperlink{classEmisoraBLE}{EmisoraBLE}} \{}
+\DoxyCodeLine{26 \textcolor{keyword}{private}:}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28   \textcolor{keyword}{const} \textcolor{keywordtype}{char} * nombreEmisora;}
+\DoxyCodeLine{29   \textcolor{keyword}{const} uint16\_t fabricanteID;}
+\DoxyCodeLine{30   \textcolor{keyword}{const} int8\_t txPower;}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{35   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{36   \textcolor{keyword}{using }CallbackConexionEstablecida = void ( uint16\_t connHandle );}
+\DoxyCodeLine{37   \textcolor{keyword}{using }CallbackConexionTerminada = void ( uint16\_t connHandle, uint8\_t reason);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{40   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{41   \mbox{\hyperlink{classEmisoraBLE}{EmisoraBLE}}( \textcolor{keyword}{const} \textcolor{keywordtype}{char} * nombreEmisora\_, \textcolor{keyword}{const} uint16\_t fabricanteID\_,}
+\DoxyCodeLine{42               \textcolor{keyword}{const} int8\_t txPower\_ ) }
+\DoxyCodeLine{43     :}
+\DoxyCodeLine{44     nombreEmisora( nombreEmisora\_ ) ,}
+\DoxyCodeLine{45     fabricanteID( fabricanteID\_ ) ,}
+\DoxyCodeLine{46     txPower( txPower\_ )}
+\DoxyCodeLine{47   \{}
+\DoxyCodeLine{48     \textcolor{comment}{// no encender ahora la emisora, tal vez sea por el println()}}
+\DoxyCodeLine{49     \textcolor{comment}{// que hace que todo falle si lo llamo en el contructor}}
+\DoxyCodeLine{50     \textcolor{comment}{// ( = antes que configuremos Serial )}}
+\DoxyCodeLine{51     \textcolor{comment}{// No parece que sea por el println,}}
+\DoxyCodeLine{52     \textcolor{comment}{// por tanto NO\_encenderEmisora();}}
+\DoxyCodeLine{53   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{56   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{57   \textcolor{comment}{/* creo que no me sirve esta versión porque parece}}
+\DoxyCodeLine{58 \textcolor{comment}{     que no se instalen los callbacks si la emisora no está encendida,}}
+\DoxyCodeLine{59 \textcolor{comment}{     pero no la puedo encender en el constructor }}
+\DoxyCodeLine{60 \textcolor{comment}{  EmisoraBLE( const char * nombreEmisora\_, const uint16\_t fabricanteID\_,}}
+\DoxyCodeLine{61 \textcolor{comment}{              const int8\_t txPower\_,}}
+\DoxyCodeLine{62 \textcolor{comment}{              CallbackConexionEstablecida cbce,}}
+\DoxyCodeLine{63 \textcolor{comment}{              CallbackConexionTerminada cbct}}
+\DoxyCodeLine{64 \textcolor{comment}{              ) }}
+\DoxyCodeLine{65 \textcolor{comment}{    :}}
+\DoxyCodeLine{66 \textcolor{comment}{    EmisoraBLE ( nombreEmisora\_, fabricanteID\_, txPower\_ )}}
+\DoxyCodeLine{67 \textcolor{comment}{  \{}}
+\DoxyCodeLine{68 \textcolor{comment}{    instalarCallbackConexionEstablecida( cbce );}}
+\DoxyCodeLine{69 \textcolor{comment}{    instalarCallbackConexionTerminada( cbct );}}
+\DoxyCodeLine{70 \textcolor{comment}{  \} // ()}}
+\DoxyCodeLine{71 \textcolor{comment}{  */}}
+\DoxyCodeLine{72     }
+\DoxyCodeLine{73   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{74   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{75   \textcolor{keywordtype}{void} encenderEmisora() \{}
+\DoxyCodeLine{76     \textcolor{comment}{// Serial.println ( "{}Bluefruit.begin() "{} );}}
+\DoxyCodeLine{77      Bluefruit.begin(); }
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79      \textcolor{comment}{// por si acaso:}}
+\DoxyCodeLine{80      (*this).detenerAnuncio();}
+\DoxyCodeLine{81   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{84   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{85   \textcolor{keywordtype}{void} encenderEmisora( CallbackConexionEstablecida cbce,}
+\DoxyCodeLine{86                         CallbackConexionTerminada cbct ) \{}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     encenderEmisora();}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     instalarCallbackConexionEstablecida( cbce );}
+\DoxyCodeLine{91     instalarCallbackConexionTerminada( cbct );}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{96   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{97   \textcolor{keywordtype}{void} detenerAnuncio() \{}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     \textcolor{keywordflow}{if} ( (*this).estaAnunciando() ) \{}
+\DoxyCodeLine{100       \textcolor{comment}{// Serial.println ( "{}Bluefruit.Advertising.stop() "{} );}}
+\DoxyCodeLine{101       Bluefruit.Advertising.stop(); }
+\DoxyCodeLine{102     \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104   \}  \textcolor{comment}{// ()}}
+\DoxyCodeLine{105   }
+\DoxyCodeLine{106   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{107   \textcolor{comment}{// estaAnunciando() -\/> Boleano}}
+\DoxyCodeLine{108   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{109   \textcolor{keywordtype}{bool} estaAnunciando() \{}
+\DoxyCodeLine{110     \textcolor{keywordflow}{return} Bluefruit.Advertising.isRunning();}
+\DoxyCodeLine{111   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{114   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{115   \textcolor{keywordtype}{void} emitirAnuncioIBeacon( uint8\_t * beaconUUID, int16\_t major, int16\_t minor, uint8\_t rssi ) \{}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{comment}{//}}
+\DoxyCodeLine{118     \textcolor{comment}{//}}
+\DoxyCodeLine{119     \textcolor{comment}{//}}
+\DoxyCodeLine{120     (*this).detenerAnuncio();}
+\DoxyCodeLine{121     }
+\DoxyCodeLine{122     \textcolor{comment}{//}}
+\DoxyCodeLine{123     \textcolor{comment}{// creo el beacon }}
+\DoxyCodeLine{124     \textcolor{comment}{//}}
+\DoxyCodeLine{125     BLEBeacon elBeacon( beaconUUID, major, minor, rssi );}
+\DoxyCodeLine{126     elBeacon.setManufacturer( (*this).fabricanteID );}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128     \textcolor{comment}{//}}
+\DoxyCodeLine{129     \textcolor{comment}{// parece que esto debe ponerse todo aquí}}
+\DoxyCodeLine{130     \textcolor{comment}{//}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132     Bluefruit.setTxPower( (*this).txPower );}
+\DoxyCodeLine{133     Bluefruit.setName( (*this).nombreEmisora );}
+\DoxyCodeLine{134     Bluefruit.ScanResponse.addName(); \textcolor{comment}{// para que envíe el nombre de emisora (?!)}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136     \textcolor{comment}{//}}
+\DoxyCodeLine{137     \textcolor{comment}{// pongo el beacon}}
+\DoxyCodeLine{138     \textcolor{comment}{//}}
+\DoxyCodeLine{139     Bluefruit.Advertising.setBeacon( elBeacon );}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141     \textcolor{comment}{//}}
+\DoxyCodeLine{142     \textcolor{comment}{// ? qué valorers poner aquí}}
+\DoxyCodeLine{143     \textcolor{comment}{//}}
+\DoxyCodeLine{144     Bluefruit.Advertising.restartOnDisconnect(\textcolor{keyword}{true}); \textcolor{comment}{// no hace falta, pero lo pongo}}
+\DoxyCodeLine{145     Bluefruit.Advertising.setInterval(100, 100);    \textcolor{comment}{// in unit of 0.625 ms}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     \textcolor{comment}{//}}
+\DoxyCodeLine{148     \textcolor{comment}{// empieza el anuncio, 0 = tiempo indefinido (ya lo pararán)}}
+\DoxyCodeLine{149     \textcolor{comment}{//}}
+\DoxyCodeLine{150     Bluefruit.Advertising.start( 0 ); }
+\DoxyCodeLine{151     }
+\DoxyCodeLine{152   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{155   \textcolor{comment}{//}}
+\DoxyCodeLine{156   \textcolor{comment}{// Ejemplo de Beacon (31 bytes)}}
+\DoxyCodeLine{157   \textcolor{comment}{//}}
+\DoxyCodeLine{158   \textcolor{comment}{// https://os.mbed.com/blog/entry/BLE-\/Beacons-\/URIBeacon-\/AltBeacons-\/iBeacon/}}
+\DoxyCodeLine{159   \textcolor{comment}{//}}
+\DoxyCodeLine{160   \textcolor{comment}{// The iBeacon Prefix contains the hex data : 0x0201061AFF004C0215. This breaks down as follows:}}
+\DoxyCodeLine{161   \textcolor{comment}{//}}
+\DoxyCodeLine{162   \textcolor{comment}{// 0x020106 defines the advertising packet as BLE General Discoverable and BR/EDR high-\/speed incompatible.}}
+\DoxyCodeLine{163   \textcolor{comment}{// Effectively it says this is only broadcasting, not connecting.}}
+\DoxyCodeLine{164   \textcolor{comment}{//}}
+\DoxyCodeLine{165   \textcolor{comment}{// 0x1AFF says the following data is 26 bytes long and is Manufacturer Specific Data.}}
+\DoxyCodeLine{166   \textcolor{comment}{//}}
+\DoxyCodeLine{167   \textcolor{comment}{// 0x004C is Apple’s Bluetooth Sig ID and is the part of this spec that makes it Apple-\/dependent.}}
+\DoxyCodeLine{168   \textcolor{comment}{//}}
+\DoxyCodeLine{169   \textcolor{comment}{// 0x02 is a secondary ID that denotes a proximity beacon, which is used by all iBeacons.}}
+\DoxyCodeLine{170   \textcolor{comment}{//}}
+\DoxyCodeLine{171   \textcolor{comment}{// 0x15 defines the remaining length to be 21 bytes (16+2+2+1).}}
+\DoxyCodeLine{172   \textcolor{comment}{//}}
+\DoxyCodeLine{173   \textcolor{comment}{// Por ejemmplo:}}
+\DoxyCodeLine{174   \textcolor{comment}{//}}
+\DoxyCodeLine{175   \textcolor{comment}{// 1. prefijo: 9bytes}}
+\DoxyCodeLine{176   \textcolor{comment}{//       0x02, 0x01, 0x06,       // advFlags 3bytes}}
+\DoxyCodeLine{177   \textcolor{comment}{//       0x1a, 0xff,             // advHeader 2 (0x1a = 26 = 25(lenght de 0x4c a 0xca)+1)   0xFF -\/> BLE\_GAP\_AD\_TYPE\_MANUFACTURER\_SPECIFIC\_DATA}}
+\DoxyCodeLine{178   \textcolor{comment}{//       0x4c, 0x00,             // companyID 2bytes}}
+\DoxyCodeLine{179   \textcolor{comment}{//       0x02,                   // ibeacon type 1 byte}}
+\DoxyCodeLine{180   \textcolor{comment}{//       0x15,                   // ibeacon length 1 byte (dec=21 lo que va a continuación: desde  la 'f' hasta 0x01)}}
+\DoxyCodeLine{181   \textcolor{comment}{// }}
+\DoxyCodeLine{182   \textcolor{comment}{// 2. uuid: 16bytes}}
+\DoxyCodeLine{183   \textcolor{comment}{// 'f', 'i', 's', 't', 'r', 'o', 'f', 'i', 's', 't', 'r', 'o', 0xa7, 0x10, 0x96, 0xe0}}
+\DoxyCodeLine{184   \textcolor{comment}{// }}
+\DoxyCodeLine{185   \textcolor{comment}{// 2 major: 2bytes}}
+\DoxyCodeLine{186   \textcolor{comment}{// 0x04, 0xd2,}}
+\DoxyCodeLine{187   \textcolor{comment}{// }}
+\DoxyCodeLine{188   \textcolor{comment}{// minor: 2bytes}}
+\DoxyCodeLine{189   \textcolor{comment}{// 0x10, 0xe1,}}
+\DoxyCodeLine{190   \textcolor{comment}{// }}
+\DoxyCodeLine{191   \textcolor{comment}{// 0xca, // tx power : 1bytes}}
+\DoxyCodeLine{192   \textcolor{comment}{//}}
+\DoxyCodeLine{193   \textcolor{comment}{// 0x01, // este es el byte 31 = BLE\_GAP\_ADV\_SET\_DATA\_SIZE\_MAX, parece que sobra}}
+\DoxyCodeLine{194   \textcolor{comment}{//}}
+\DoxyCodeLine{195   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{196   \textcolor{comment}{// Para enviar como carga libre los últimos 21 bytes de un iBeacon (lo que normalmente sería uuid-\/16 major-\/2 minor-\/2 txPower-\/1)}}
+\DoxyCodeLine{197   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{198   \textcolor{comment}{/*}}
+\DoxyCodeLine{199 \textcolor{comment}{  void emitirAnuncioIBeaconLibre( const char * carga ) \{}}
+\DoxyCodeLine{200 \textcolor{comment}{}}
+\DoxyCodeLine{201 \textcolor{comment}{    const uint8\_t tamanyoCarga = strlen( carga );}}
+\DoxyCodeLine{202 \textcolor{comment}{  */}}
+\DoxyCodeLine{203   \textcolor{keywordtype}{void} emitirAnuncioIBeaconLibre( \textcolor{keyword}{const} \textcolor{keywordtype}{char} * carga, \textcolor{keyword}{const} uint8\_t tamanyoCarga ) \{}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     (*this).detenerAnuncio(); }
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207     Bluefruit.Advertising.clearData();}
+\DoxyCodeLine{208     Bluefruit.ScanResponse.clearData(); \textcolor{comment}{// hace falta?}}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \textcolor{comment}{// Bluefruit.setTxPower( (*this).txPower ); creo que no lo pongo porque es uno de los bytes de la parte de carga que utilizo}}
+\DoxyCodeLine{211     Bluefruit.setName( (*this).nombreEmisora );}
+\DoxyCodeLine{212     Bluefruit.ScanResponse.addName();}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214     Bluefruit.Advertising.addFlags(BLE\_GAP\_ADV\_FLAGS\_LE\_ONLY\_GENERAL\_DISC\_MODE);}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216     \textcolor{comment}{// con este parece que no va  !}}
+\DoxyCodeLine{217     \textcolor{comment}{// Bluefruit.Advertising.addFlags(BLE\_GAP\_ADV\_FLAG\_LE\_GENERAL\_DISC\_MODE);}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219     \textcolor{comment}{//}}
+\DoxyCodeLine{220     \textcolor{comment}{// hasta ahora habrá, supongo, ya puestos los 5 primeros bytes. Efectivamente.}}
+\DoxyCodeLine{221     \textcolor{comment}{// Falta poner 4 bytes fijos (company ID, beacon type, longitud) y 21 de carga}}
+\DoxyCodeLine{222     \textcolor{comment}{//}}
+\DoxyCodeLine{223     uint8\_t restoPrefijoYCarga[4+21] = \{}
+\DoxyCodeLine{224       0x4c, 0x00, \textcolor{comment}{// companyID 2}}
+\DoxyCodeLine{225       0x02, \textcolor{comment}{// ibeacon type 1byte}}
+\DoxyCodeLine{226       21, \textcolor{comment}{// ibeacon length 1byte (dec=21)  longitud del resto // 0x15 // ibeacon length 1byte (dec=21)  longitud del resto}}
+\DoxyCodeLine{227       \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, }
+\DoxyCodeLine{228       \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, }
+\DoxyCodeLine{229       \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, }
+\DoxyCodeLine{230       \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, }
+\DoxyCodeLine{231       \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, \textcolor{charliteral}{'-\/'}, }
+\DoxyCodeLine{232       \textcolor{charliteral}{'-\/'}}
+\DoxyCodeLine{233     \};}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235     \textcolor{comment}{//}}
+\DoxyCodeLine{236     \textcolor{comment}{// addData() hay que usarlo sólo una vez. Por eso copio la carga}}
+\DoxyCodeLine{237     \textcolor{comment}{// en el anterior array, donde he dejado 21 sitios libres}}
+\DoxyCodeLine{238     \textcolor{comment}{//}}
+\DoxyCodeLine{239     memcpy( \&restoPrefijoYCarga[4], \&carga[0], ( tamanyoCarga > 21 ? 21 : tamanyoCarga ) ); }
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241     \textcolor{comment}{//}}
+\DoxyCodeLine{242     \textcolor{comment}{// copio la carga para emitir}}
+\DoxyCodeLine{243     \textcolor{comment}{//}}
+\DoxyCodeLine{244     Bluefruit.Advertising.addData( BLE\_GAP\_AD\_TYPE\_MANUFACTURER\_SPECIFIC\_DATA,}
+\DoxyCodeLine{245                                    \&restoPrefijoYCarga[0],}
+\DoxyCodeLine{246                                    4+21 );}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248     \textcolor{comment}{//}}
+\DoxyCodeLine{249     \textcolor{comment}{// ? qué valores poner aquí ?}}
+\DoxyCodeLine{250     \textcolor{comment}{//}}
+\DoxyCodeLine{251     Bluefruit.Advertising.restartOnDisconnect(\textcolor{keyword}{true});}
+\DoxyCodeLine{252     Bluefruit.Advertising.setInterval(100, 100);    \textcolor{comment}{// in unit of 0.625 ms}}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254     Bluefruit.Advertising.setFastTimeout( 1 );      \textcolor{comment}{// number of seconds in fast mode}}
+\DoxyCodeLine{255     \textcolor{comment}{//}}
+\DoxyCodeLine{256     \textcolor{comment}{// empieza el anuncio, 0 = tiempo indefinido (ya lo pararán)}}
+\DoxyCodeLine{257     \textcolor{comment}{//}}
+\DoxyCodeLine{258     Bluefruit.Advertising.start( 0 ); }
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260     Globales::elPuerto.escribir( \textcolor{stringliteral}{"{}emitiriBeacon libre  Bluefruit.Advertising.start( 0 );  \(\backslash\)n"{}});}
+\DoxyCodeLine{261   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{264   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{265   \textcolor{keywordtype}{bool} anyadirServicio( \mbox{\hyperlink{classServicioEnEmisora}{ServicioEnEmisora}} \& servicio ) \{}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267     Globales::elPuerto.escribir( \textcolor{stringliteral}{"{} Bluefruit.Advertising.addService( servicio ); \(\backslash\)n"{}});}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269     \textcolor{keywordtype}{bool} r = Bluefruit.Advertising.addService( servicio );}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271     \textcolor{keywordflow}{if} ( ! r ) \{}
+\DoxyCodeLine{272       Serial.println( \textcolor{stringliteral}{"{} SERVICION NO AÑADIDO \(\backslash\)n"{}});}
+\DoxyCodeLine{273     \}}
+\DoxyCodeLine{274     }
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276     \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{277      \textcolor{comment}{// nota: uso conversión de tipo de servicio (ServicioEnEmisora) a BLEService}}
+\DoxyCodeLine{278      \textcolor{comment}{// para addService()}}
+\DoxyCodeLine{279   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281   }
+\DoxyCodeLine{282   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{283   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{284   \textcolor{keywordtype}{bool} anyadirServicioConSusCaracteristicas( \mbox{\hyperlink{classServicioEnEmisora}{ServicioEnEmisora}} \& servicio ) \{ }
+\DoxyCodeLine{285     \textcolor{keywordflow}{return} (*this).anyadirServicio( servicio );}
+\DoxyCodeLine{286   \} \textcolor{comment}{// }}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{289   \textcolor{keyword}{template} <\textcolor{keyword}{typename} ... T>}
+\DoxyCodeLine{290   \textcolor{keywordtype}{bool} anyadirServicioConSusCaracteristicas( \mbox{\hyperlink{classServicioEnEmisora}{ServicioEnEmisora}} \& servicio,}
+\DoxyCodeLine{291                                              \mbox{\hyperlink{classServicioEnEmisora_1_1Caracteristica}{ServicioEnEmisora::Caracteristica}} \& caracteristica,}
+\DoxyCodeLine{292                                              T\& ... restoCaracteristicas) \{}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294     servicio.anyadirCaracteristica( caracteristica );}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{296     \textcolor{keywordflow}{return} anyadirServicioConSusCaracteristicas( servicio, restoCaracteristicas... );}
+\DoxyCodeLine{297     }
+\DoxyCodeLine{298   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{301   \textcolor{keyword}{template} <\textcolor{keyword}{typename} ... T>}
+\DoxyCodeLine{302   \textcolor{keywordtype}{bool} anyadirServicioConSusCaracteristicasYActivar( \mbox{\hyperlink{classServicioEnEmisora}{ServicioEnEmisora}} \& servicio,}
+\DoxyCodeLine{303                                                      \textcolor{comment}{// ServicioEnEmisora::Caracteristica \& caracteristica,}}
+\DoxyCodeLine{304                                                      T\& ... restoCaracteristicas) \{}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306     \textcolor{keywordtype}{bool} r = anyadirServicioConSusCaracteristicas( servicio, restoCaracteristicas... );}
+\DoxyCodeLine{307 }
+\DoxyCodeLine{308     servicio.activarServicio();}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310     \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{311     }
+\DoxyCodeLine{312   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{315   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{316   \textcolor{keywordtype}{void} instalarCallbackConexionEstablecida( CallbackConexionEstablecida cb ) \{}
+\DoxyCodeLine{317     Bluefruit.Periph.setConnectCallback( cb );}
+\DoxyCodeLine{318   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{321   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{322   \textcolor{keywordtype}{void} instalarCallbackConexionTerminada( CallbackConexionTerminada cb ) \{}
+\DoxyCodeLine{323     Bluefruit.Periph.setDisconnectCallback( cb );}
+\DoxyCodeLine{324   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{327   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{328   BLEConnection * getConexion( uint16\_t connHandle ) \{}
+\DoxyCodeLine{329     \textcolor{keywordflow}{return} Bluefruit.Connection( connHandle );}
+\DoxyCodeLine{330   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{332 \}; \textcolor{comment}{// class}}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{334 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{337 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{338 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{339 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{340 }
+
+\end{DoxyCode}

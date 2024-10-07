@@ -1,0 +1,110 @@
+\hypertarget{classEmisoraBLE}{}\doxysection{Referencia de la Clase Emisora\+BLE}
+\label{classEmisoraBLE}\index{EmisoraBLE@{EmisoraBLE}}
+\doxysubsection*{Tipos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a922f7f1ab1063eb40c99e4a3676be258}\label{classEmisoraBLE_a922f7f1ab1063eb40c99e4a3676be258}} 
+using {\bfseries Callback\+Conexion\+Establecida} = void(uint16\+\_\+t conn\+Handle)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_afd6faaf6a924a50ea027046703300b0b}\label{classEmisoraBLE_afd6faaf6a924a50ea027046703300b0b}} 
+using {\bfseries Callback\+Conexion\+Terminada} = void(uint16\+\_\+t conn\+Handle, uint8\+\_\+t reason)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a922f7f1ab1063eb40c99e4a3676be258}\label{classEmisoraBLE_a922f7f1ab1063eb40c99e4a3676be258}} 
+using {\bfseries Callback\+Conexion\+Establecida} = void(uint16\+\_\+t conn\+Handle)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_afd6faaf6a924a50ea027046703300b0b}\label{classEmisoraBLE_afd6faaf6a924a50ea027046703300b0b}} 
+using {\bfseries Callback\+Conexion\+Terminada} = void(uint16\+\_\+t conn\+Handle, uint8\+\_\+t reason)
+\end{DoxyCompactItemize}
+\doxysubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_ae2e94b95bde4cddf0038deb0368cc5bf}\label{classEmisoraBLE_ae2e94b95bde4cddf0038deb0368cc5bf}} 
+{\bfseries Emisora\+BLE} (const char $\ast$nombre\+Emisora\+\_\+, const uint16\+\_\+t fabricante\+ID\+\_\+, const int8\+\_\+t tx\+Power\+\_\+)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a31f9c768b91b9e353f693f509af3ea73}\label{classEmisoraBLE_a31f9c768b91b9e353f693f509af3ea73}} 
+void {\bfseries encender\+Emisora} ()
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_ada243f2f1185a7d66ea33de6bdb06590}\label{classEmisoraBLE_ada243f2f1185a7d66ea33de6bdb06590}} 
+void {\bfseries encender\+Emisora} (Callback\+Conexion\+Establecida cbce, Callback\+Conexion\+Terminada cbct)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_aeede390b7a6502baecb48e9db77120b4}\label{classEmisoraBLE_aeede390b7a6502baecb48e9db77120b4}} 
+void {\bfseries detener\+Anuncio} ()
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_ac32548698cf69ecef9e96941fc2e1b94}\label{classEmisoraBLE_ac32548698cf69ecef9e96941fc2e1b94}} 
+bool {\bfseries esta\+Anunciando} ()
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_aff23b85351177e685353b1ee92a1558f}\label{classEmisoraBLE_aff23b85351177e685353b1ee92a1558f}} 
+void {\bfseries emitir\+Anuncio\+IBeacon} (uint8\+\_\+t $\ast$beacon\+UUID, int16\+\_\+t major, int16\+\_\+t minor, uint8\+\_\+t rssi)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a8439d1e85ec8d630fcd33b01d8987d41}\label{classEmisoraBLE_a8439d1e85ec8d630fcd33b01d8987d41}} 
+void {\bfseries emitir\+Anuncio\+IBeacon\+Libre} (const char $\ast$carga, const uint8\+\_\+t tamanyo\+Carga)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a0f027a1c447357c5fe79200b36451731}\label{classEmisoraBLE_a0f027a1c447357c5fe79200b36451731}} 
+bool {\bfseries anyadir\+Servicio} (\mbox{\hyperlink{classServicioEnEmisora}{Servicio\+En\+Emisora}} \&servicio)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a074a16066fc8ae37567a342e3df63bf5}\label{classEmisoraBLE_a074a16066fc8ae37567a342e3df63bf5}} 
+bool {\bfseries anyadir\+Servicio\+Con\+Sus\+Caracteristicas} (\mbox{\hyperlink{classServicioEnEmisora}{Servicio\+En\+Emisora}} \&servicio)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_aa589659b63ae877910eab1b39a93a339}\label{classEmisoraBLE_aa589659b63ae877910eab1b39a93a339}} 
+{\footnotesize template$<$typename ... T$>$ }\\bool {\bfseries anyadir\+Servicio\+Con\+Sus\+Caracteristicas} (\mbox{\hyperlink{classServicioEnEmisora}{Servicio\+En\+Emisora}} \&servicio, \mbox{\hyperlink{classServicioEnEmisora_1_1Caracteristica}{Servicio\+En\+Emisora\+::\+Caracteristica}} \&caracteristica, T \&... resto\+Caracteristicas)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a0a0673823174ce9ffb96fb1c0dfb11ab}\label{classEmisoraBLE_a0a0673823174ce9ffb96fb1c0dfb11ab}} 
+{\footnotesize template$<$typename ... T$>$ }\\bool {\bfseries anyadir\+Servicio\+Con\+Sus\+Caracteristicas\+YActivar} (\mbox{\hyperlink{classServicioEnEmisora}{Servicio\+En\+Emisora}} \&servicio, T \&... resto\+Caracteristicas)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_ae15e223776af83a8cac07564c168d0b9}\label{classEmisoraBLE_ae15e223776af83a8cac07564c168d0b9}} 
+void {\bfseries instalar\+Callback\+Conexion\+Establecida} (Callback\+Conexion\+Establecida cb)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a2bb6b319046a10641619c1388f7fe351}\label{classEmisoraBLE_a2bb6b319046a10641619c1388f7fe351}} 
+void {\bfseries instalar\+Callback\+Conexion\+Terminada} (Callback\+Conexion\+Terminada cb)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_aa863c5f29e1f0d4dd1ae023b30350960}\label{classEmisoraBLE_aa863c5f29e1f0d4dd1ae023b30350960}} 
+BLEConnection $\ast$ {\bfseries get\+Conexion} (uint16\+\_\+t conn\+Handle)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_ae2e94b95bde4cddf0038deb0368cc5bf}\label{classEmisoraBLE_ae2e94b95bde4cddf0038deb0368cc5bf}} 
+{\bfseries Emisora\+BLE} (const char $\ast$nombre\+Emisora\+\_\+, const uint16\+\_\+t fabricante\+ID\+\_\+, const int8\+\_\+t tx\+Power\+\_\+)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a31f9c768b91b9e353f693f509af3ea73}\label{classEmisoraBLE_a31f9c768b91b9e353f693f509af3ea73}} 
+void {\bfseries encender\+Emisora} ()
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_ada243f2f1185a7d66ea33de6bdb06590}\label{classEmisoraBLE_ada243f2f1185a7d66ea33de6bdb06590}} 
+void {\bfseries encender\+Emisora} (Callback\+Conexion\+Establecida cbce, Callback\+Conexion\+Terminada cbct)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_aeede390b7a6502baecb48e9db77120b4}\label{classEmisoraBLE_aeede390b7a6502baecb48e9db77120b4}} 
+void {\bfseries detener\+Anuncio} ()
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_ac32548698cf69ecef9e96941fc2e1b94}\label{classEmisoraBLE_ac32548698cf69ecef9e96941fc2e1b94}} 
+bool {\bfseries esta\+Anunciando} ()
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_aff23b85351177e685353b1ee92a1558f}\label{classEmisoraBLE_aff23b85351177e685353b1ee92a1558f}} 
+void {\bfseries emitir\+Anuncio\+IBeacon} (uint8\+\_\+t $\ast$beacon\+UUID, int16\+\_\+t major, int16\+\_\+t minor, uint8\+\_\+t rssi)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a8439d1e85ec8d630fcd33b01d8987d41}\label{classEmisoraBLE_a8439d1e85ec8d630fcd33b01d8987d41}} 
+void {\bfseries emitir\+Anuncio\+IBeacon\+Libre} (const char $\ast$carga, const uint8\+\_\+t tamanyo\+Carga)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a0f027a1c447357c5fe79200b36451731}\label{classEmisoraBLE_a0f027a1c447357c5fe79200b36451731}} 
+bool {\bfseries anyadir\+Servicio} (\mbox{\hyperlink{classServicioEnEmisora}{Servicio\+En\+Emisora}} \&servicio)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a074a16066fc8ae37567a342e3df63bf5}\label{classEmisoraBLE_a074a16066fc8ae37567a342e3df63bf5}} 
+bool {\bfseries anyadir\+Servicio\+Con\+Sus\+Caracteristicas} (\mbox{\hyperlink{classServicioEnEmisora}{Servicio\+En\+Emisora}} \&servicio)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_aa589659b63ae877910eab1b39a93a339}\label{classEmisoraBLE_aa589659b63ae877910eab1b39a93a339}} 
+{\footnotesize template$<$typename ... T$>$ }\\bool {\bfseries anyadir\+Servicio\+Con\+Sus\+Caracteristicas} (\mbox{\hyperlink{classServicioEnEmisora}{Servicio\+En\+Emisora}} \&servicio, \mbox{\hyperlink{classServicioEnEmisora_1_1Caracteristica}{Servicio\+En\+Emisora\+::\+Caracteristica}} \&caracteristica, T \&... resto\+Caracteristicas)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a0a0673823174ce9ffb96fb1c0dfb11ab}\label{classEmisoraBLE_a0a0673823174ce9ffb96fb1c0dfb11ab}} 
+{\footnotesize template$<$typename ... T$>$ }\\bool {\bfseries anyadir\+Servicio\+Con\+Sus\+Caracteristicas\+YActivar} (\mbox{\hyperlink{classServicioEnEmisora}{Servicio\+En\+Emisora}} \&servicio, T \&... resto\+Caracteristicas)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_ae15e223776af83a8cac07564c168d0b9}\label{classEmisoraBLE_ae15e223776af83a8cac07564c168d0b9}} 
+void {\bfseries instalar\+Callback\+Conexion\+Establecida} (Callback\+Conexion\+Establecida cb)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_a2bb6b319046a10641619c1388f7fe351}\label{classEmisoraBLE_a2bb6b319046a10641619c1388f7fe351}} 
+void {\bfseries instalar\+Callback\+Conexion\+Terminada} (Callback\+Conexion\+Terminada cb)
+\item 
+\mbox{\Hypertarget{classEmisoraBLE_aa863c5f29e1f0d4dd1ae023b30350960}\label{classEmisoraBLE_aa863c5f29e1f0d4dd1ae023b30350960}} 
+BLEConnection $\ast$ {\bfseries get\+Conexion} (uint16\+\_\+t conn\+Handle)
+\end{DoxyCompactItemize}
+
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+Arduino\+\_\+\+Fijo/\+PBIO\+\_\+\+Sprint0\+\_\+fijos/Emisora\+BLE.\+h\item 
+Arduino\+\_\+\+Reales/\+PBIO\+\_\+\+Sprint0/Emisora\+BLE.\+h\end{DoxyCompactItemize}

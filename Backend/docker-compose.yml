@@ -1,0 +1,53 @@
+version: '3.8' # Versión de docker-compose, puede que salga un mensaje diciendo que está desfasada
+services:
+  node:
+    container_name: sprint0_njs
+    build: 
+      context: ./nodejs
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - "8080:8080" # Puerto que conecta nodejs con la web
+    depends_on:
+      - mariadb
+    env_file:
+      - ./variables.env
+    command: bash -c "while !</dev/tcp/mariadb/3306; do sleep 1; done; node servidorREST.js"
+  mariadb:
+    container_name: sprint0_mdb
+    restart: always # Siempre reiniciar el contenedor
+    build:
+      context: ./mariadb
+      dockerfile: Dockerfile
+    env_file:
+      - ./variables.env # Variables de entorno, como usuario y contraseña, privadas
+    ports:
+      - "3306:3306" # Puerto que conecta nodejs con mariadb
+    volumes: #Información que guardo de la base de datos
+      - ./mariadb/sql:/docker-entrypoint-initdb.d  # Monta la carpeta sql
+      - db_data:/var/lib/mysql
+  nginx: # Contenedor para la web
+    container_name: sprint0_ngx
+    build:
+      context: ./nodejs/app_web
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"  # El puerto 80 funciona con HTTP, NO HTTPS
+volumes:
+  db_data:
+    driver: local
+
+#
+# server:
+#    build:
+#      context: ./src
+#      dockerfile: ./Dockerfile
+#    container_name: server
+#    image: server
+#    ports:
+#      - 127.0.0.1:8080:8080
+#    env_file:
+#      - ./server.env
+#    depends_on:
+#      - mariadb
+#

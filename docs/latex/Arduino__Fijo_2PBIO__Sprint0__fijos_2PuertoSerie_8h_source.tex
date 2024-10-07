@@ -1,0 +1,51 @@
+\hypertarget{Arduino__Fijo_2PBIO__Sprint0__fijos_2PuertoSerie_8h_source}{}\doxysection{Puerto\+Serie.\+h}
+\label{Arduino__Fijo_2PBIO__Sprint0__fijos_2PuertoSerie_8h_source}\index{Arduino\_Fijo/PBIO\_Sprint0\_fijos/PuertoSerie.h@{Arduino\_Fijo/PBIO\_Sprint0\_fijos/PuertoSerie.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{2 \textcolor{comment}{// -\/*-\/ mode: c++ -\/*-\/}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{5 \textcolor{comment}{// Jordi Bataller i Mascarell}}
+\DoxyCodeLine{6 \textcolor{comment}{// 2019-\/07-\/07}}
+\DoxyCodeLine{7 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef PUERTO\_SERIE\_H\_INCLUIDO}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define PUERTO\_SERIE\_H\_INCLUIDO}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{13 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{classPuertoSerie}{PuertoSerie}}  \{}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{public}:}
+\DoxyCodeLine{17   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{18   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{19   \mbox{\hyperlink{classPuertoSerie}{PuertoSerie}} (\textcolor{keywordtype}{long} baudios) \{}
+\DoxyCodeLine{20     Serial.begin( baudios );}
+\DoxyCodeLine{21     \textcolor{comment}{// mejor no poner esto aquí: while ( !Serial ) delay(10);   }}
+\DoxyCodeLine{22   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{25   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{26   \textcolor{keywordtype}{void} esperarDisponible() \{}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     delay(10);   }
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{33   \textcolor{comment}{// .........................................................}}
+\DoxyCodeLine{34   \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{35   \textcolor{keywordtype}{void} escribir (T mensaje) \{}
+\DoxyCodeLine{36     Serial.print( mensaje );}
+\DoxyCodeLine{37   \} \textcolor{comment}{// ()}}
+\DoxyCodeLine{38   }
+\DoxyCodeLine{39 \}; \textcolor{comment}{// class PuertoSerie}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{42 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{43 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{44 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

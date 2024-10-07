@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.4"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Códigos Generales Sprint 0 PBIO: Sprint0</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Códigos Generales Sprint 0 PBIO
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.9.4 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Buscar','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Sprint0 </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="autotoc_md3518"></a>
+¿Cómo funciona esta primera versión?</h1>
+<p >He seguido las instrucciones de Jordi Bataller, creando una carpeta propia para MariaDB y Node.js, con sus respectivos Dockerfiles. Después, he creado un archivo <code>docker-compose.yml</code> que relaciona ambos contenedores y automatiza todo aquello que deberíamos hacer a mano.</p>
+<h2><a class="anchor" id="autotoc_md3519"></a>
+MariaDB</h2>
+<p >El Dockerfile de MariaDB funciona de la siguiente manera:</p>
+<ul>
+<li><b>Imagen Base</b>: Se utiliza la última imagen de MariaDB de la web oficial de Docker Hub (<a href="https://hub.docker.com/_/mariadb">mariadb</a>). Para crear esta imagen se ejecuta el comando <code>docker pull mariadb</code>.</li>
+<li><b>Contraseña</b>: Se crea una variable que establece una contraseña (en esta primera versión es <code>1234</code>).</li>
+<li><b>Inicialización</b>: Se ejecuta el comando para crear la base de datos (ubicada en el directorio <code>/sql</code> dentro de la misma carpeta de MariaDB) y se define la ruta del entrypoint que inicializará la base de datos en el contenedor de MariaDB.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md3520"></a>
+SQL</h3>
+<p >El archivo <code>ejemploBBDD.sql</code> contiene la creación de la base de datos y la tabla que se utilizará en el proyecto. Aquí se guardará la información que se reciba de los sensores de gas. En este instante, contiene los siguientes campos:</p>
+<ul>
+<li><code>id</code>: Es la Primary Key y es un valor que se autoincrementa.</li>
+<li><code>hora</code>: Está definida por el tipo de variable <code>TIME</code> y debe ser <code>NOT NULL</code>, debido a que no puede dar un valor 0. Tendrá la siguiente estructura: "00:00", siendo el primer par de ceros las horas (de 1 a 24) y el segundo par los minutos.</li>
+<li><code>lugar</code>: Está definido por el tipo de variable <code>VARCHAR</code> que puede contener hasta 255 caracteres, tampoco puede ser <code>NULL</code>.</li>
+<li><code>id_sensor</code>: Es un valor entero <code>INT</code> y será el encargado de identificar a cada sensor individualmente.</li>
+<li><code>valorGas</code>: Es la medición que dará el sensor de gas y está definida por un número <code>DECIMAL(5,2)</code>, que tampoco puede ser <code>NULL</code>.</li>
+<li><code>valorTemperatura</code>: Es la medición que dará el sensor de temperatura. Sigue estando definida por un número <code>DECIMAL(5,2)</code> y su implementación se realizará en un futuro.</li>
+</ul>
+<p >Un ejemplo de inserción de datos podría ser el siguiente: </p><div class="fragment"><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mediciones (id, hora, lugar, idSensor, valorGas, valorTemperatura) </div>
+<div class="line"><span class="keyword">VALUES</span> (<span class="stringliteral">333</span>, <span class="stringliteral">&#39;12:00&#39;</span>, <span class="stringliteral">&#39;Cartagena&#39;</span>, <span class="stringliteral">130</span>, <span class="stringliteral">55</span>, <span class="stringliteral">35</span>);</div>
+</div><!-- fragment --><p> Mediante la consola de MariaDB desde dentro de su contenedor, se ha comprobado de manera exitosa que los datos se insertan correctamente y que la tabla se actualiza recargando la página en tu propia máquina en local: <a href="http://localhost:8080">http://localhost:8080</a></p>
+<h2><a class="anchor" id="autotoc_md3521"></a>
+Node.js</h2>
+<p >Dentro de la carpeta de Node.js podrás encontrar todos los módulos que se crean al iniciar por primera vez npm con Node.js (el comando es: <code>npm init -y</code>).</p>
+<p >El Dockerfile de Node.js funciona de la siguiente manera:</p>
+<ul>
+<li><b>Imagen Base</b>: Se utiliza la última imagen de Node.js de la web oficial de Docker Hub (<a href="https://hub.docker.com/_/node">node</a>). Para crear esta imagen se ejecuta el comando <code>docker pull node</code>.</li>
+<li><b>Directorio de Trabajo</b>: Se crea el directorio donde se ejecutará nuestra lógica de negocio ubicada en el archivo <code>main.js</code>.</li>
+<li><b>Copiar Archivos de Dependencias</b>: Se copian los archivos generados por el comando <code>npm init -y</code> (<code>package.json</code> y <code>package-lock.json</code>) desde nuestro host al sistema de archivos del contenedor Docker.</li>
+<li><b>Instalación de Dependencias</b>: Para comunicarse con la base de datos de MariaDB, es necesario que se ejecute la instalación con el comando <code>npm install mariadb</code>.</li>
+<li><b>Copiar Código</b>: Con <code>COPY . .</code> copiamos el resto del código de nuestra máquina host al contenedor Docker en el directorio correspondiente.</li>
+<li><b>Exponer Puerto</b>: Abrimos el puerto 8080 de nuestra máquina local con el comando <code>EXPOSE 8080</code>. De esta manera podremos acceder al JSON de la base de datos con la siguiente URL: <a href="http://localhost:8080">http://localhost:8080</a>.</li>
+<li><b>Ejecutar Aplicación</b>: Por último, ejecutamos en la consola nuestro <code>main.js</code> con el comando <code>CMD ["node", "main.js"]</code>.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md3522"></a>
+ServidorREST</h3>
+<p >En el archivo <code>servidorREST.js</code> se ha creado un pequeño servidor REST donde se ha configurado la base de datos de MariaDB, pasándole los parámetros para poder acceder a la misma. También, se ha implementado una API con Swagger, que es una herramienta gráfica que ayuda a probar la API creada. Esta API se encarga de hacer consultas a la base de datos de manera de prueba. Puede realizar tanto GET como POST, apuntando a la tabla de mediciones (que contiene los campos: <code>id</code>, <code>hora</code>, <code>lugar</code>, <code>idSensor</code>, <code>valorGas</code>, <code>valorTemperatura</code>).</p>
+<p >El funcionamiento de la API se puede ver de manera muy visual yendo a la siguiente dirección URL: <a href="http://localhost:3000/api-docs/">http://localhost:3000/api-docs/</a>.</p>
+<h2><a class="anchor" id="autotoc_md3523"></a>
+docker-compose.yml</h2>
+<p >Este es un archivo que se encarga de unir tanto el Dockerfile de MariaDB como el Dockerfile de Node.js. Con este archivo, se ejecutan automáticamente ambos sin la necesidad de teclear nada por la terminal.</p>
+<ul>
+<li><b>MariaDB</b>: Se abre un puerto en 3306 y un puerto de Docker (también el 3306). Después, crea una red interna que es esencial para que ambos contenedores funcionen correctamente sincronizados. En mi caso se llama "redsprint0". He implementado también una verificación de salud del contenedor de MariaDB. El comando <code>healthcheck</code> se encarga de pasar unos tests internos que aseguran el correcto funcionamiento del contenedor.</li>
+<li><b>Node.js</b>: En el módulo de Node.js se abre también un puerto (en este caso el 8080 para que no se solape con el 3306 de MariaDB) y se crea también la misma red que hará de puente entre los dos contenedores. </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.4
+</small></address>
+</body>
+</html>

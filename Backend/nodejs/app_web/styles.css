@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#mediciones {
+    margin-top: 20px;
+}
+
+.medicion {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}

@@ -11,8 +11,8 @@ services:
     depends_on:
       - mariadb
     env_file:
-      - ./variables.env
-    command: bash -c "while !</dev/tcp/mariadb/3306; do sleep 1; done; node servidorREST.js"
+      - ./variables.env  # Variables de entorno, como usuario y contraseña, deben ser privadas
+    command: bash -c "while !</dev/tcp/mariadb/3306; do sleep 1; done; node servidorREST.js"  # Comando para que nodejs espere a que mariadb esté listo
   mariadb:
     container_name: sprint0_mdb
     restart: always # Siempre reiniciar el contenedor

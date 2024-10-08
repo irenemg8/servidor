@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const app = express();
 
 // Configuración general de la base de datos
+// Se recomienda usar variables de entorno para almacenar la configuración
 const config = {
   host: process.env.DB_HOST,
   user: process.env.DB_USUARIO,

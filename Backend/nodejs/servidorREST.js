@@ -5,7 +5,7 @@ const mariadb = require('mariadb');  // Importar mariadb
 const app = express();
 const dotenv = require('dotenv');
 const cors = require('cors'); 
-const port = 8080;
+const port = 8080; // Puerto donde correrá el servidor
 
 // Cargar variables de entorno desde el archivo .env
 dotenv.config();
@@ -84,17 +84,17 @@ const pool = mariadb.createPool({
  *               items:
  *                 $ref: '#/components/schemas/Medicion'
  */
-app.get('/mediciones', async (req, res) => {
+app.get('/mediciones', async (req, res) => { // Ruta para consultar la base de datos. Método GET
   let connection;
   try {
     connection = await pool.getConnection();
-    const rows = await connection.query('SELECT * FROM mediciones');
+    const rows = await connection.query('SELECT * FROM mediciones');  // Realizar una consulta SELECT para obtener todas las mediciones de la bd
     res.json(rows);
   } catch (err) {
     console.error('Error: ', err);
     res.status(500).send('Error en la consulta');
   } finally {
-    if (connection) connection.release();
+    if (connection) connection.release(); 
   }
 });
 
@@ -118,12 +118,12 @@ app.get('/mediciones', async (req, res) => {
  *             schema:
  *               $ref: '#/components/schemas/Medicion'
  */
-app.post('/mediciones', async (req, res) => {
-  const nuevaMedicion = req.body;
+app.post('/mediciones', async (req, res) => {  // Ruta para insertar una nueva medición. Método POST
+  const nuevaMedicion = req.body; // Obtener la medición desde el cuerpo de la petición
   let connection;
   try {
     connection = await pool.getConnection();
-    const query = 'INSERT INTO mediciones (hora, lugar, id_sensor, valorGas, valorTemperatura) VALUES (?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO mediciones (hora, lugar, id_sensor, valorGas, valorTemperatura) VALUES (?, ?, ?, ?, ?)';   // Realizar una consulta INSERT para insertar una nueva medición. ? se usa para no concatenar directamente los valores
     const result = await connection.query(query, [
       nuevaMedicion.hora, 
       nuevaMedicion.lugar, 
@@ -152,21 +152,21 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:8080'
+        url: 'http://localhost:8080' // URL del servidor
       }
     ]
   },
-  apis: ['./servidorREST.js']
+  apis: ['./servidorREST.js'] // Archivo que contiene las rutas
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));  // Ruta para la documentación de la API
 
 // Servidor corriendo
 app.listen(port, () => {
-  console.log(`API REST corriendo en http://localhost:${port}/api-docs/`);
-  console.log(`APP WEB corriendo en http://localhost`);
-  console.log(`Mediciones de la base de datos corriendo en http://localhost:8080/mediciones`);
+  console.log(`API REST corriendo en http://localhost:${port}/api-docs/`);  // Mostrar la URL de la documentación de la API
+  console.log(`APP WEB corriendo en http://localhost`);  // Mostrar la URL de la documentación de la APP
+  console.log(`Mediciones de la base de datos corriendo en http://localhost:8080/mediciones`);  // Mostrar la URL de las mediciones de la base de datos
 });
 
 /*

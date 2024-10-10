@@ -7,18 +7,16 @@ const dotenv = require('dotenv');
 const cors = require('cors'); 
 const port = 8080; // Puerto donde correrá el servidor
 
-// Cargar variables de entorno desde el archivo .env
-dotenv.config();
 app.use(cors());
 // Middleware para procesar JSON
 app.use(express.json());
 // Configuración de la base de datos (similar a main.js)
 const pool = mariadb.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USUARIO,
-  password: process.env.DB_CONTRASENYA,
-  database: process.env.DB_NOMBRE,
-  connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT, 10)
+  host: 'sprint0_mdb',
+  user: 'root',
+  password: '1234',
+  database: 'ejemploBBDD',
+  connectionLimit: 5
 });
 
 /**

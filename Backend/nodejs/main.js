@@ -1,16 +1,15 @@
 const mariadb = require('mariadb');
 const express = require('express');
-const dotenv = require('dotenv');
 const app = express();
 
 // Configuración general de la base de datos
 // Se recomienda usar variables de entorno para almacenar la configuración
 const config = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USUARIO,
-  password: process.env.DB_CONTRASENYA,
-  database: process.env.DB_NOMBRE,
-  connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT, 10)
+  host: 'sprint0_mdb',  // Cambia el nombre según tu configuración de contenedor
+  user: 'root',     // Usuario de la base de datos
+  password: '1234', // Contraseña de la base de datos
+  database: 'ejemploBBDD', // Nombre de tu base de datos
+  connectionLimit: 5  // Límite de conexiones simultáneas
 };
 
 console.log("Creando pool...");

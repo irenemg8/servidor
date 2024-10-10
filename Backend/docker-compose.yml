@@ -10,8 +10,6 @@ services:
       - "8080:8080" # Puerto que conecta nodejs con la web
     depends_on:
       - mariadb
-    env_file:
-      - ./variables.env  # Variables de entorno, como usuario y contraseña, deben ser privadas
     command: bash -c "while !</dev/tcp/mariadb/3306; do sleep 1; done; node servidorREST.js"  # Comando para que nodejs espere a que mariadb esté listo
   mariadb:
     container_name: sprint0_mdb
@@ -19,8 +17,9 @@ services:
     build:
       context: ./mariadb
       dockerfile: Dockerfile
-    env_file:
-      - ./variables.env # Variables de entorno, como usuario y contraseña, privadas
+    environment:
+      - MARIA_DB_ROOT_PASSWORD=1234 # Contraseña de la base de datos
+      - MARIA_DATABASE=ejemploBBDD # Nombre de la base de datos
     ports:
       - "3306:3306" # Puerto que conecta nodejs con mariadb
     volumes: #Información que guardo de la base de datos

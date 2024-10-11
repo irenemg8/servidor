@@ -11,7 +11,6 @@ COPY main.js /home/nodejs
 RUN if [ ! -f package.json ]; then npm init -y; fi
 
 # Instalamos las dependencias
-RUN npm install
 RUN apt update
 RUN npm install mariadb
 RUN npm install cors

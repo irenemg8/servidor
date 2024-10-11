@@ -1,6 +1,6 @@
 async function obtenerMediciones() {
     try {
-        const response = await fetch('http://localhost:8080/mediciones');
+        const response = await fetch('http://192.168.0.26:8080/mediciones');
         if (!response.ok) {
             throw new Error('Error en la respuesta de la API');
         }

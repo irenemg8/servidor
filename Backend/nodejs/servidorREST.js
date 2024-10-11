@@ -3,7 +3,6 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const mariadb = require('mariadb');  // Importar mariadb
 const app = express();
-const dotenv = require('dotenv');
 const cors = require('cors'); 
 const port = 8080; // Puerto donde correrá el servidor
 
